@@ -7,7 +7,7 @@ class HangpersonGame
 
   # def initialize()
   # end
-  
+  # take this comment out. Testing git  
   def initialize(word)
     @word = word
   end
