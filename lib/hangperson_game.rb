@@ -18,23 +18,30 @@ class HangpersonGame
   end
   
   def guess(s)
-    @guesses = ''
-    @wrong_guesses = ''
-    if s.length > 1 then
-      new_s = s.split(//)
-      new_s.each do |x|
-        guess(x)
+    if (/\A[a-zA-Z]\Z/ =~ s) == 0 then 
+      s = s.downcase
+      if wrong_guesses.include? s or guesses.include? s then
+        return false
       end
-    else
-      print new_s
       if @word.include? s then
         @guesses += s
+        return true
       else
-        @wrong_guesses += s
+        if !(@wrong_guesses.include? s) then
+          @wrong_guesses += s
+        end
       end
-    return true
+      return false
+    else
+      raise ArgumentError
     end
+  end
     
+  def guess_several_letters(g,letters)
+    new_list = letters.split(//)
+    new_list.each do |x|
+      guess(x)
+    end
   end
     
 
