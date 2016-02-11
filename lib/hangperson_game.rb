@@ -10,11 +10,14 @@ class HangpersonGame
   attr_accessor :word
   attr_accessor :guesses
   attr_accessor :wrong_guesses
+  attr_accessor :displayed
+  attr_accessor
   
   def initialize(word)
     @word = word
     @guesses = ''
     @wrong_guesses = ''
+    @displayed = ''
   end
   
   def guess(s)
@@ -43,8 +46,28 @@ class HangpersonGame
       guess(x)
     end
   end
-    
+  
+  def word_with_guesses
+    word_asList = word.split(//)
+    word_asList.each do |letter|
+      if guesses.include? letter then
+        @displayed += letter
+      else
+        @displayed += "-"
+      end
+    end
+    return @displayed
+  end
 
+  def check_win_or_lose
+    if @wrong_guesses.length == 7 then
+      return :lose
+    elsif @word == word_with_guesses
+      return :win
+    else
+      return :play
+    end
+  end
   def self.get_random_word
     require 'uri'
     require 'net/http'
