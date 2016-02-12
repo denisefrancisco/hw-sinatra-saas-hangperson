@@ -11,7 +11,6 @@ class HangpersonGame
   attr_accessor :guesses
   attr_accessor :wrong_guesses
   attr_accessor :displayed
-  attr_accessor
   
   def initialize(word)
     @word = word
@@ -68,6 +67,7 @@ class HangpersonGame
       return :play
     end
   end
+  
   def self.get_random_word
     require 'uri'
     require 'net/http'
