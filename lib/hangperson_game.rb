@@ -11,7 +11,6 @@ class HangpersonGame
   attr_accessor :guesses
   attr_accessor :wrong_guesses
   attr_accessor :displayed
-  attr_accessor
   
   def initialize(word)
     @word = word
