@@ -19,6 +19,10 @@ class HangpersonGame
     @displayed = ''
   end
   
+  def length
+    return @word.length
+  end
+  
   def guess(s)
     if (/\A[a-zA-Z]\Z/ =~ s) == 0 then 
       s = s.downcase
@@ -59,14 +63,15 @@ class HangpersonGame
   end
 
   def check_win_or_lose
-    if @wrong_guesses.length == 7 then
+    if @wrong_guesses.length == 7 and word_with_guesses != @word then
       return :lose
-    elsif @word == word_with_guesses
+    elsif @word == word_with_guesses and @wrong_guesses.length <= 7 then 
       return :win
     else
       return :play
     end
   end
+  
   def self.get_random_word
     require 'uri'
     require 'net/http'
