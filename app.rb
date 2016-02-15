@@ -32,7 +32,6 @@ class HangpersonApp < Sinatra::Base
     @game = HangpersonGame.new(word)
     redirect '/show'
   end
-  
   # Use existing methods in HangpersonGame to process a guess.
   # If a guess is repeated, set flash[:message] to "You have already used that letter."
   # If a guess is invalid, set flash[:message] to "Invalid guess."
@@ -59,14 +58,10 @@ class HangpersonApp < Sinatra::Base
   # wrong_guesses and word_with_guesses from @game.
   get '/show' do
     ### YOUR CODE HERE ##
-    if @game.wrong_guesses.length > 0 or @game.guesses.length > 0 then 
-      if @game.check_win_or_lose == :win then
-        redirect '/win'
-      elsif @game.check_win_or_lose == :lose then
-         redirect '/lose'
-      else
-        erb :show
-      end
+    if @game.check_win_or_lose == :win then
+      redirect '/win'
+    elsif @game.check_win_or_lose == :lose then
+      redirect '/lose'
     else
       erb :show
     end
@@ -74,12 +69,22 @@ class HangpersonApp < Sinatra::Base
   
   get '/win' do
     ### YOUR CODE HERE ##
-    erb :win # You may change/remove this line
+    if @game.word_with_guesses == @game.word then 
+      erb :win
+    else
+       redirect '/show'
+    end
+    #erb :win # You may change/remove this line
   end
   
   get '/lose' do
     ### YOUR CODE HERE ###
-    erb :lose # You may change/remove this line
+    if @game.wrong_guesses.length == 7 and @game.word_with_guesses != @game.word then
+      erb :lose
+    else
+      redirect '/show'
+    end
+    #erb :lose # You may change/remove this line
   end
   
 end
