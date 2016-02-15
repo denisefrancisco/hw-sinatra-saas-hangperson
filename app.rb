@@ -46,6 +46,8 @@ class HangpersonApp < Sinatra::Base
       else
         @game.guess(letter)
       end
+    else
+        flash[:message] = "Invalid guess."
     end
     redirect '/show'
   end
