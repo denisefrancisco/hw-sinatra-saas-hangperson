@@ -82,8 +82,10 @@ class HangpersonGame
 =begin
 game1 = HangpersonGame.new("foobar")
 game1.guess("o")
+game1.guess("x")
 puts game1.displayed
 puts game1.word_with_guesses
+puts game1.wrong_guesses.length+game1.guesses.length
 =end
 
 end
