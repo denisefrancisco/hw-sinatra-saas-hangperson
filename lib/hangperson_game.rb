@@ -26,20 +26,15 @@ class HangpersonGame
   def guess(s)
     if (/\A[a-zA-Z]\Z/ =~ s) == 0 then 
       s = s.downcase
-      if wrong_guesses.include? s or guesses.include? s then
-        word_with_guesses
+      if @wrong_guesses.include? s or @guesses.include? s then
         return false
-      end
-      if @word.include? s then
+      elsif @word.include? s then
         @guesses += s
         word_with_guesses
         return true
       else
-        if !(@wrong_guesses.include? s) then
-          @wrong_guesses += s
-        end
+        @wrong_guesses += s
       end
-      word_with_guesses
       return false
     else
       raise ArgumentError
@@ -55,7 +50,7 @@ class HangpersonGame
   
   def word_with_guesses
     new_word = ""
-    word_asList = word.split(//)
+    word_asList = @word.split(//)
     word_asList.each { |letter|
       if @guesses.include? letter then
         new_word += letter
@@ -64,8 +59,7 @@ class HangpersonGame
       end
     }
     @displayed = new_word
-    #return new_word
-    return 'b--b--b--'
+    return new_word
   end
 
   def check_win_or_lose
@@ -87,7 +81,7 @@ class HangpersonGame
   
 =begin
 game1 = HangpersonGame.new("foobar")
-game1.guess_several_letters("azxo")
+game1.guess("o")
 puts game1.displayed
 puts game1.word_with_guesses
 =end
