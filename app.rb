@@ -74,7 +74,6 @@ class HangpersonApp < Sinatra::Base
     else
        redirect '/show'
     end
-    #erb :win # You may change/remove this line
   end
   
   get '/lose' do
@@ -84,7 +83,6 @@ class HangpersonApp < Sinatra::Base
     else
       redirect '/show'
     end
-    #erb :lose # You may change/remove this line
   end
   
 end
