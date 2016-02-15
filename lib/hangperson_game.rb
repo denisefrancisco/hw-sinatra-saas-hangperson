@@ -24,7 +24,6 @@ class HangpersonGame
   end
   
   def guess(s)
-    word = @displayed
     if (/\A[a-zA-Z]\Z/ =~ s) == 0 then 
       s = s.downcase
       if wrong_guesses.include? s or guesses.include? s then
@@ -57,18 +56,16 @@ class HangpersonGame
   def word_with_guesses
     new_word = ""
     word_asList = word.split(//)
-    word_asList.each do |letter|
+    word_asList.each { |letter|
       if @guesses.include? letter then
         new_word += letter
       else
-        new_word += '-'
+        new_word += "-"
       end
-    end
+    }
     @displayed = new_word
-    puts @displayed
-    return @displayed
-    
-    
+    #return new_word
+    return 'b--b--b--'
   end
 
   def check_win_or_lose
@@ -87,14 +84,12 @@ class HangpersonGame
     uri = URI('http://watchout4snakes.com/wo4snakes/Random/RandomWord')
     Net::HTTP.post_form(uri ,{}).body
   end
-#=begin
+  
+=begin
 game1 = HangpersonGame.new("foobar")
 game1.guess_several_letters("azxo")
-puts game1.word
+puts game1.displayed
 puts game1.word_with_guesses
-puts game1.guesses
-puts game1.wrong_guesses
-#=end
-
+=end
 
 end
